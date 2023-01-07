@@ -8,8 +8,13 @@ export default function CVForm(props) {
     return (
         <div>
             <Personal 
-                cv = {props.cv}
-                handleChange = {props.handleChange}
+                cv={props.cv.personal}
+                handleChange={props.handlePersonalChange}
+            />
+
+            <Experience
+                cv={props.cv.experience}
+                handleChange={props.handleExperienceChange}
             />
         </div>
     )

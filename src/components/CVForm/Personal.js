@@ -23,7 +23,7 @@ export default function Personal(props) {
             <br/>
             <input type="email" name="email" value = {props.cv.email} onChange = {props.handleChange} placeholder="Email"/>
             <br/>
-            <textarea name="detalhes" value={props.cv.detalhes} onChange = {props.handleChange} placeholder="detalhes"></textarea>
+            <textarea name="detalhes" value = {props.cv.detalhes} onChange = {props.handleChange} placeholder="detalhes"></textarea>
         </>
         
     )

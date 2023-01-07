@@ -5,25 +5,60 @@ import emptyCV from "./Utils/EmptyCV";
 
 export default function Main() {
 
-    const [cvPersonal, setCvPersonal] = React.useState(emptyCV.personal);
+    const [cv, setCv] = React.useState(emptyCV);
 
     React.useEffect(() => {
-        console.log(cvPersonal)
-    }, [cvPersonal])
+        console.log(cv.experience)
+    }, [cv])
 
-    function handleChange(e) {
+    function handlePersonalChange(e) {
 
-        setCvPersonal((prevState) => {
+        setCv((prevState) => {
             return {
                 ...prevState,
-                [e.target.name]: e.target.value
+                personal: {
+                    ...prevState.personal,
+                    [e.target.name]: e.target.value
+                }
             }
+        })
+    }
+
+    function handleExperienceChange(e, id) {
+
+        setCv((prevState) => {
+            return {
+                /*...prevState,
+                experience: [
+                    {
+                        ...prevState.experience[0],
+                        [e.target.name]: e.target.value
+                    }
+                ]*/
+
+                ...prevState,
+                experience: prevState.experience.map(
+                    (experienceItem) => {
+                        if(experienceItem.id === id) {
+                            return {
+                                ...experienceItem,
+                                [e.target.name]: e.target.value
+                            }
+                        } else {
+                            return experienceItem
+                        }
+
+                    }
+                )
+
+            }
+            
         })
     }
 
     return (
         <>
-            <CVForm cv = {cvPersonal} handleChange={handleChange}/>
+            <CVForm cv = {cv} handlePersonalChange={handlePersonalChange} handleExperienceChange={handleExperienceChange}/>
         </>
     )
 }
