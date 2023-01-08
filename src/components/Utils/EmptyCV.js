@@ -19,14 +19,6 @@ const exampleCV = {
             cidade: "",
             inicio: "",
             fim: ""
-        },
-        {
-            id: uuidv4(),
-            cargo: "",
-            empresa: "",
-            cidade: "",
-            inicio: "",
-            fim: ""
         }
     ],
     education: [

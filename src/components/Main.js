@@ -2,13 +2,14 @@ import React from "react";
 import CVForm from "./CVForm";
 import CVPreview from "./CVPreview";
 import emptyCV from "./Utils/EmptyCV";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Main() {
 
     const [cv, setCv] = React.useState(emptyCV);
 
     React.useEffect(() => {
-        console.log(cv.experience)
+        console.log(cv)
     }, [cv])
 
     function handlePersonalChange(e) {
@@ -25,17 +26,8 @@ export default function Main() {
     }
 
     function handleExperienceChange(e, id) {
-
         setCv((prevState) => {
             return {
-                /*...prevState,
-                experience: [
-                    {
-                        ...prevState.experience[0],
-                        [e.target.name]: e.target.value
-                    }
-                ]*/
-
                 ...prevState,
                 experience: prevState.experience.map(
                     (experienceItem) => {
@@ -47,18 +39,116 @@ export default function Main() {
                         } else {
                             return experienceItem
                         }
-
                     }
                 )
-
             }
-            
+        })
+    }
+
+    function handleEducationChange(e, id) {
+        setCv((prevState) => {
+            return {
+                ...prevState,
+                education: prevState.education.map(
+                    (educationItem) => {
+                        if(educationItem.id === id) {
+                            return {
+                                ...educationItem,
+                                [e.target.name]: e.target.value
+                            }
+                        } else {
+                            return educationItem
+                        }
+                    }
+                )
+            }
+        })
+    }
+
+    function addNewExperienceField() {
+
+        function ExperienceItemFactory() {
+            return {
+                id: uuidv4(),
+                cargo: "",
+                empresa: "",
+                cidade: "",
+                inicio: "",
+                fim: ""
+            }
+        }
+
+        setCv((prevState) => {
+            return {
+                ...prevState,
+                experience: [
+                    ...prevState.experience,
+                    ExperienceItemFactory()
+                ]
+            }
+        })
+    }
+
+    function removeExperienceField(id) {
+
+        setCv((prevState) => {
+            return {
+                ...prevState,
+                experience: prevState.experience.filter(
+                    (experienceItem) => experienceItem.id !== id
+                )
+            }
+        })
+    }
+
+    function addNewEducationField() {
+
+        function EducationItemFactory() {
+            return {
+                id: uuidv4(),
+                universidade: "",
+                curso: "",
+                cidade: "",
+                inicio: "",
+                fim: ""
+            }
+        }
+
+        setCv((prevState) => {
+            return {
+                ...prevState,
+                education: [
+                    ...prevState.education,
+                    EducationItemFactory()
+                ]
+            }
+        })
+    }
+
+    function removeEducationField(id) {
+        setCv((prevState) => {
+            return {
+                ...prevState,
+                education: prevState.education.filter(
+                    (educationItem) => educationItem.id !==id
+                )
+            }
         })
     }
 
     return (
         <>
-            <CVForm cv = {cv} handlePersonalChange={handlePersonalChange} handleExperienceChange={handleExperienceChange}/>
+            <CVForm 
+                cv={cv} 
+                handlePersonalChange={handlePersonalChange} 
+                handleExperienceChange={handleExperienceChange}
+                handleEducationChange={handleEducationChange}
+                addNewExperienceField={addNewExperienceField}
+                removeExperienceField={removeExperienceField}
+                addNewEducationField={addNewEducationField}
+                removeEducationField={removeEducationField}
+            />
+            <CVPreview />
         </>
     )
 }

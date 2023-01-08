@@ -1,7 +1,3 @@
-import React from "react";
+import CVPreview from "./CVPreview";
 
-export default function CVPreview(){
-    return(
-        <h1>Teste</h1>
-    )
-}
+export default CVPreview

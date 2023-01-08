@@ -15,6 +15,14 @@ export default function CVForm(props) {
             <Experience
                 cv={props.cv.experience}
                 handleChange={props.handleExperienceChange}
+                addNewField={props.addNewExperienceField}
+                removeField={props.removeExperienceField}
+            />
+            <Education
+                cv={props.cv.education}
+                handleChange={props.handleEducationChange}
+                addNewField={props.addNewEducationField}
+                removeField={props.removeEducationField}
             />
         </div>
     )
