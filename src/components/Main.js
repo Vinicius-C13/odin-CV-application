@@ -148,7 +148,7 @@ export default function Main() {
                 addNewEducationField={addNewEducationField}
                 removeEducationField={removeEducationField}
             />
-            <CVPreview />
+            <CVPreview cv={cv}/>
         </>
     )
 }
